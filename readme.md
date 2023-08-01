@@ -28,7 +28,7 @@ For each step of optimization the procedure follows:
 3. split batch into 3 arrays: state_batch, action_batch and reward_batch
 4. Compute Q(s,a) for all states sampled.
     - run the state_batch through the NN and select the columns of actions taken (actions for each state according to the net).
-5. Compute V(s~t+1~), aka expected maximum reward for all next states. This is stored in ***next_state_values***
+5. Compute V(s<sub>t+1</sub>), aka expected maximum reward for all next states. This is stored in ***next_state_values***
     - This is calculated based on the older target network. ***(next_state_values * GAMMA) + reward_batch***, where reward_batch is the current states reward.
 6. Compute the loss via Huber Loss
     - The temporal difference (input to loss function) is calculated as the reward for current state_action pairs minus the expected reward for the next_state_action pairs. This is minimised to make the models current reward function converge with the expected reward.
