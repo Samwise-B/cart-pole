@@ -11,7 +11,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 
-env = gym.make("CartPole-v1")
+env = gym.make("CartPole-v1", render_mode="human")
 
 plt.ion()
 
@@ -174,6 +174,7 @@ else:
 for i_episode in range(num_episodes):
     # initialise the environment and get its state
     state, info = env.reset()
+    env.render()
     state = torch.tensor(state, dtype=torch.float32, device=device).unsqueeze(0)
     for t in count():
         action = select_action(state)
