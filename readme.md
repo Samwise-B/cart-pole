@@ -1,6 +1,18 @@
 # Overview
 
-DQN works by using a Neural Network as a function approximator. Where the function is trying to determine the action which gives the highest reward given the current observed state.
+DQN works by using a Neural Network (NN) as a function approximator. Where the function is trying to determine the action which gives the highest reward given the current observed state.
+
+![image of ideal Q function]("Ideal Q Learn.png")
+
+Note: π<sup>*</sup>(s) picks the action with maximum reward given a state.
+As we do not have access to Q* we train a neural network to resemble Q*.
+
+![function used for updating the model]("tempora difference error.png")
+
+Note: Q<sup>π</sup>(s,a) is the idealistic Q function. If we had all the information about possible (state, action) pairs then the reward for a given (state, action) would be equalivalent to the reward + the discounted reward of the next (state, ***best_action***). This provides us with an error function that can be used to adjust NN parameters.
+
+![huber loss function]("Huber loss.png")
+
 
 # Keywords
 **Episode**: a single simulation of the environment
@@ -30,6 +42,15 @@ For each step of optimization the procedure follows:
     - run the state_batch through the NN and select the columns of actions taken (actions for each state according to the net).
 5. Compute V(s<sub>t+1</sub>), aka expected maximum reward for all next states. This is stored in ***next_state_values***
     - This is calculated based on the older target network. ***(next_state_values * GAMMA) + reward_batch***, where reward_batch is the current states reward.
-6. Compute the loss via Huber Loss
+6. Compute the loss via Huber Loss applied to the ***temporal difference error***
     - The temporal difference (input to loss function) is calculated as the reward for current state_action pairs minus the expected reward for the next_state_action pairs. This is minimised to make the models current reward function converge with the expected reward.
 7. Optimize the model.
+
+# Hyperparameters
+- BATCH_SIZE: number of transitions sampled from memory
+- GAMMA: discount factor for the Bellman's equation
+- EPS_START: starting value for epsilon (used for probability of random vs policy action)
+- EPS_END: the final value of epsilon
+- EPS_DECAY: the rate of exponential decay (higher means slower)
+- TAU: is the update rate of the target network
+- LR: is the learning rate of the AdamW optimizer
