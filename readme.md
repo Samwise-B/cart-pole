@@ -2,16 +2,16 @@
 
 DQN works by using a Neural Network (NN) as a function approximator. Where the function is trying to determine the action which gives the highest reward given the current observed state.
 
-![image of ideal Q function]("Ideal Q Learn.png")
+![image of ideal Q function](Ideal_Q_Learn.png")
 
 Note: π<sup>*</sup>(s) picks the action with maximum reward given a state.
 As we do not have access to Q* we train a neural network to resemble Q*.
 
-![function used for updating the model]("temporal difference error.png")
+![function used for updating the model](temporal_difference_error.png")
 
 Note: Q<sup>π</sup>(s,a) is the idealistic Q function. If we had all the information about possible (state, action) pairs then the reward for a given (state, action) would be equalivalent to the reward + the discounted reward of the next (state, ***best_action***). This provides us with an error function that can be used to adjust NN parameters.
 
-![huber loss function]("Huber loss.png")
+![huber loss function](Huber_loss.png)
 
 
 # Keywords
